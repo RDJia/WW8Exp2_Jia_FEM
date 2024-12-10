@@ -133,6 +133,6 @@ if __name__ == '__main__':
     # Test().task5_2()
     #  Test().task5_3()
     # Test().task6_2_3()
-    # Test().task7_2()
+    Test().task7_2()
     Test().task8_1()
 
