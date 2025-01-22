@@ -110,21 +110,32 @@ class Test():
 
     def task8_1(self):
         print('###### Testing Task 8.1 ######\n')
-        N = 12 # number of elements
+        N = 6 # number of nodes
 
-        stress_fields, x_points = LinearSys().postProcess(BC_1=np.array([[0, None], [15, None], [30, None], [15,30], [30,45]])\
-                                , A=25, E=210000, L=50, F=10, N=N)
+        BCs = np.array([[0, None, None, None, None, None],
+                        [15, None, None, None, None, None],
+                        [45, None, None, None, None, None],
+                        [15, None, None, None, None, 30],
+                        [15, None, None, 15, None, None],
+                        [0, None, None, None, 30, None]])
 
+        stress_fields, x_points = LinearSys().postProcess(BC_1=BCs, A=25, E=210000, L=50, F=100, N=N)
+
+        print("stress_fields:")
+        print(stress_fields)
+
+        """
         # plot some stress fields in a figure for comparison
         plt.figure()
         ax = plt.plot(x_points, stress_fields[0], '-o', label='u1 = 0 mm', markersize=10)
         plt.plot(x_points, stress_fields[1], '-o', label='u1 = 15 mm')
-        plt.plot(x_points, stress_fields[3], '-o', label='u1 = u6 = 15 mm')
-        plt.plot(x_points, stress_fields[4], '-o', label='u1 = 15 mm, u6 = 45 mm')
+        plt.plot(x_points, stress_fields[3], '-o', label='u1 = 15 mm, u6 = 30 mm')
+        plt.plot(x_points, stress_fields[4], '-o', label='u1 = 15 mm, u4 = 15 mm')
         plt.xlabel('nodes')
         plt.ylabel('stress (Pa)')
         plt.legend()
         plt.show()
+        """
 
 
 if __name__ == '__main__':
@@ -133,6 +144,5 @@ if __name__ == '__main__':
     # Test().task5_2()
     #  Test().task5_3()
     # Test().task6_2_3()
-    Test().task7_2()
+    # Test().task7_2()
     Test().task8_1()
-
